@@ -1,7 +1,7 @@
-// Злой Гопник - группа 23, защита 0, стрел 100, сила 0
+// Злой Гопник - расширяет абстрактный класс Оруженосец
 package ms.aoe.units;
-public class Punk extends BaseHero {
-    public Punk(int x, int y) {
-        super(23, x, y, 0, 100, 0);
+public class Punk extends AbstrSquire {
+    public Punk(String name, int x, int y) {
+        super(name, x, y, 0, 100, 0);
     } 
 }

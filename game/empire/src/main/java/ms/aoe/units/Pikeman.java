@@ -1,9 +1,9 @@
-// Добрый Копейщик - группа 12, защита 100, ударов копьем 1000, сила 70
+// Добрый Копейщик - расширяет абстрактный класс Солдат
 package ms.aoe.units;
-public class Pikeman extends BaseHero{
+public class Pikeman extends AbstrSoldier {
 
-    public Pikeman(int x, int y) {
-        super(12, x, y, 100, 1000, 70);
+    public Pikeman(String name, int x, int y) {
+        super(name, x, y, 100, 1000, 70);
     }
     
 }

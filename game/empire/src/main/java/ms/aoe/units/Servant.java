@@ -1,9 +1,9 @@
-// Добрый Слуга - группа 13, защита 0, болтов 50, сила 0
+// Добрый Слуга - расширяет абстрактный класс Оруженосец
 package ms.aoe.units;
-public class Servant extends BaseHero{
+public class Servant extends AbstrSquire{
 
-    public Servant(int x, int y) {
-        super(13, x, y, 0, 50, 0);
+    public Servant(String name, int x, int y) {
+        super(name, x, y, 0, 50, 0);
     }
     
 }

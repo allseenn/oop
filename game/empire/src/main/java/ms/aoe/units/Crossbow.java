@@ -1,9 +1,9 @@
-// Добрый Арбалетчик - группа 11, защита 30, болтов 5, сила 70
+// Добрый Арбалетчик - расширяет абстрактный класс Стрелок
 package ms.aoe.units;
-public class Crossbow extends BaseHero{
+public class Crossbow extends AbstrBow {
 
-    public Crossbow(int x, int y) {
-        super(11, x, y, 30, 5, 70);
+    public Crossbow(String name, int x, int y) {
+        super(name, x, y, 30, 5, 70);
     }
     
 }

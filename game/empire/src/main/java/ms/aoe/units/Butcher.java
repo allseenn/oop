@@ -1,9 +1,9 @@
-// Злой Мясник - группа 22, защита 70, ударов топора 1000, сила 1000 
+// Злой Мясник - расширяет абстрактный класс Солдат
 package ms.aoe.units;
-public class Butcher extends BaseHero{
+public class Butcher extends AbstrSoldier {
 
-    public Butcher(int x, int y) {
-        super(22, x, y, 70, 1000, 100);
+    public Butcher(String name, int x, int y) {
+        super(name, x, y, 70, 1000, 100);
     }
     
 }

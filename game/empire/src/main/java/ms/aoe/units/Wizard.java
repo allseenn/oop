@@ -1,8 +1,8 @@
-// Добрый Волшебник - группа 14, защита 50, заклятья 50, сила 100
+// Добрый Волшебник - расширяет абстрактный класс Волшебник
 package ms.aoe.units;
-public class Wizard extends BaseHero{
+public class Wizard extends AbstrMagic{
 
-    public Wizard(int x, int y) {
-        super(14, x, y, 50, 50, 100);
+    public Wizard(String name, int x, int y) {
+        super(name, x, y, 50, 50, 100);
     }
 }

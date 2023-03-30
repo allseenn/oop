@@ -1,11 +1,11 @@
-// Злой Колдун - группа 24, защита 50, проклятья 50, сила 100
+// Злой Колдун - расширяет абстрактный класс Волшебник
 
 package ms.aoe.units;
 
-public class Witch extends BaseHero{
+public class Witch extends AbstrMagic{
 
-    public Witch(int x, int y) {
-        super(24, x, y, 50, 50, 100);
+    public Witch(String name, int x, int y) {
+        super(name, x, y, 50, 50, 100);
     }
     
 }
