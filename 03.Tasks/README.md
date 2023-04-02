@@ -4,6 +4,7 @@
 2. Найти ближайшего противника и вывести в консоль его имя.
 
 ## Сделано ##
+[Игра выложена на гитхаб](https://github.com/allseenn/oop/tree/main/game/empire/src/main/java/ms/aoe)
 
 Перенес абстрактные классы в пакет abstr
 
