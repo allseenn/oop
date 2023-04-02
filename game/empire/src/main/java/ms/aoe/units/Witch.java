@@ -2,11 +2,13 @@
 
 package ms.aoe.units;
 
-public class Witch extends AbstrMagic{
+import ms.aoe.abstr.Magican;
 
-    public Witch(String name, int x, int y) {
-        super(name, x, y, 50, 50, 100);
+public class Witch extends Magican {
+
+    public Witch(boolean team, int id, String name, int x, int y) {
+        super(team, id, "Колдун", name, x, y);
     }
-    
+
 }
 

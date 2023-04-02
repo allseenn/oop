@@ -1,10 +1,13 @@
 // Добрый Копейщик - расширяет абстрактный класс Солдат
 package ms.aoe.units;
-public class Pikeman extends AbstrSoldier {
 
-    public Pikeman(String name, int x, int y) {
-        super(name, x, y, 100, 1000, 70);
+import ms.aoe.abstr.Soldier;
+
+public class Pikeman extends Soldier {
+
+    public Pikeman(boolean team, int id, String name, int x, int y) {
+        super(team, id, "Копейщик", name, x, y);
     }
-    
+
 }
 

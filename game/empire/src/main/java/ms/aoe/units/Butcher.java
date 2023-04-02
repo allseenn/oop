@@ -1,10 +1,13 @@
 // Злой Мясник - расширяет абстрактный класс Солдат
 package ms.aoe.units;
-public class Butcher extends AbstrSoldier {
 
-    public Butcher(String name, int x, int y) {
-        super(name, x, y, 70, 1000, 100);
+import ms.aoe.abstr.Soldier;
+
+public class Butcher extends Soldier {
+
+    public Butcher(boolean team, int id, String name, int x, int y) {
+        super(team, id, "Мясник", name, x, y);
     }
-    
+
 }
 

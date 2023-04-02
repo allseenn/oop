@@ -1,0 +1,49 @@
+package org.example;
+
+import java.util.ArrayList;
+
+public class Sniper extends BaseHero {
+    private int arrows; // стрелы
+    private int accuracy; // точность
+
+    public int getArrows() {
+        return arrows;
+    }
+
+    public void setArrows(int arrows) {
+        this.arrows = arrows;
+    }
+
+    public int getAccuracy() {
+        return accuracy;
+    }
+    public void setAccuracy(int accuracy) {
+        this.accuracy = accuracy;
+    }
+
+    public Sniper(String name, int x, int y) {
+        super(60, 100, name, x, y, 95, new int[] {6,12}, 80);
+        arrows = 10;
+        accuracy = 90;
+    }
+
+    @Override
+    public void step(ArrayList<BaseHero> enemy) { // враг
+        if (hp <= 0)
+            return;
+        if (arrows == 0)
+            return;
+        double minDis = position.distance(enemy.get(0).position);
+        int indexEnemy = 0;
+        for (int i = 1; i < enemy.size(); i++) {
+            double curDis = position.distance(enemy.get(i).position);
+            if (curDis < minDis) {
+                minDis = curDis;
+                indexEnemy = i;
+            }
+        }
+        System.out.println("shoot");
+    }
+    
+
+}

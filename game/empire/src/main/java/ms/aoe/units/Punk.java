@@ -1,7 +1,10 @@
-// Злой Гопник - расширяет абстрактный класс Оруженосец
+// Злой Шестерка - расширяет абстрактный класс Оруженосец
 package ms.aoe.units;
-public class Punk extends AbstrSquire {
-    public Punk(String name, int x, int y) {
-        super(name, x, y, 0, 100, 0);
-    } 
+
+import ms.aoe.abstr.Servant;
+
+public class Punk extends Servant {
+    public Punk(boolean team, int id, String name, int x, int y) {
+        super(team, id, "Шестерка", name, x, y);
+    }
 }

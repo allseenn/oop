@@ -1,54 +1,55 @@
 package ms.aoe;
 import java.util.*;
+
+import ms.aoe.abstr.Actor;
 import ms.aoe.units.*;
 public class App {
     public static void main(String[] args) {
-        System.out.println("THE GOOD GUYS:");
-        ArrayList<AbstrActor> good = new ArrayList<>();
+        int teamSize = 10;
+        LinkedList<Actor> units = new LinkedList<>();
         Random random = new Random();
-        for (int i = 0; i < 10; i++) {
-            switch (random.nextInt(5)) {
+        for (int i = 0; i < teamSize; i++) {
+            switch (random.nextInt(4)) {
                 case 0:
-                    good.add(new Crossbow(GoodNames(), 1, 5));
+                    units.add(new Bowman(false, i, BadNames(i), i, teamSize-1));
                     break;
                 case 1:
-                    good.add(new Pikeman(GoodNames(), 2, 8));
+                    units.add(new Butcher(false, i, BadNames(i), i, teamSize-1));
                     break;
                 case 2:
-                    good.add(new Wizard(GoodNames(), 3, 5));
+                    units.add(new Witch(false, i, BadNames(i), i, teamSize-1));
                     break;
                 default:
-                    good.add(new Servant(GoodNames(), 2, 10));
+                    units.add(new Punk(false, i, BadNames(i), i, teamSize-1));
             }
         }
-        good.forEach(n -> System.out.println(n));
-
-        System.out.println("THE EVIL SIDE:");
-        ArrayList<AbstrActor> evil = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            switch (random.nextInt(5)) {
+        for (int i = teamSize; i < teamSize*2; i++) {
+            switch (random.nextInt(4)) {
                 case 0:
-                    evil.add(new Bowman(BadNames(), 1, 5));
+                    units.add(new Crossbow(true, i, GoodNames(i), 0, i));
                     break;
                 case 1:
-                    evil.add(new Butcher(BadNames(), 2, 8));
+                    units.add(new Pikeman(true, i, GoodNames(i), 0, i));
                     break;
                 case 2:
-                    evil.add(new Witch(BadNames(), 3, 5));
+                    units.add(new Wizard(true, i, GoodNames(i), 0, i));
                     break;
                 default:
-                    evil.add(new Punk(BadNames(), 2, 10));
+                    units.add(new Squire(true, i, GoodNames(i), 0, i));
             }
         }
-        evil.forEach(n -> System.out.println(n));  
+       units.forEach(n -> System.out.println(n.step(units)));
+       
 
     }
-    public static String BadNames()
+    public static String BadNames(int i)
     {
-        return NamesBad.values()[new Random().nextInt(NamesBad.values().length)].toString();
+        NamesBad[] names = NamesBad.values();
+        return names[i].toString();
     }
-    public static String GoodNames()
+    public static String GoodNames(int i)
     {
-        return NamesGood.values()[new Random().nextInt(NamesGood.values().length)].toString();
+        NamesGood[] names = NamesGood.values();
+        return names[i].toString();
     }
 }

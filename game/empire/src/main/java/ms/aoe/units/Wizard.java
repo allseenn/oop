@@ -1,8 +1,11 @@
 // Добрый Волшебник - расширяет абстрактный класс Волшебник
 package ms.aoe.units;
-public class Wizard extends AbstrMagic{
 
-    public Wizard(String name, int x, int y) {
-        super(name, x, y, 50, 50, 100);
+import ms.aoe.abstr.Magican;
+
+public class Wizard extends Magican {
+
+    public Wizard(boolean team, int id, String name, int x, int y) {
+        super(team, id, "Волшебник", name, x, y);
     }
 }
