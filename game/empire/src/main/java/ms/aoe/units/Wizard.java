@@ -6,6 +6,6 @@ import ms.aoe.abstr.Magican;
 public class Wizard extends Magican {
 
     public Wizard(boolean team, int id, String name, int x, int y) {
-        super(team, id, "Волшебник", name, x, y);
+        super(team, id, WizarkRank, name, x, y);
     }
 }

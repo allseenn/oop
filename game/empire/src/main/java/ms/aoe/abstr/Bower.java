@@ -5,10 +5,10 @@ import java.util.LinkedList;
 
 public abstract class Bower extends Actor {
 
-    int accuracy=75; // точность стрельбы
+    int accuracy=BowerAccuracy; // точность стрельбы
     // int range=10; // дальность стрельбы
     @Override
-    public String step(LinkedList<Actor>units) {return super.toString();}
+    public void step(LinkedList<Actor>units) {}
 
     @Override
     public String toString() {
@@ -16,7 +16,7 @@ public abstract class Bower extends Actor {
     }
 
     public Bower(boolean team, int id, String staff, String name, int x, int y) {
-        super(team, id, staff, name, x, y, 55, 50, 50);
+        super(team, id, staff, name, x, y, BowerAmmo, BowerArmor, BowerForce);
 
     }
 

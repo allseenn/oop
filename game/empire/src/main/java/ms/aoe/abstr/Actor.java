@@ -1,5 +1,6 @@
 // Актер - Высший абстрактный класс
 package ms.aoe.abstr;
+import ms.aoe.Colorit;
 import ms.aoe.Interface;
 import java.util.LinkedList;
 
@@ -13,7 +14,7 @@ public abstract class Actor implements Interface {
     }
 
     @Override
-    public String step(LinkedList<Actor> units) {return "";}
+    public void step(LinkedList<Actor> units) { }
 
     public boolean getTeam(){return this.team;}
     public int getId(){return this.id;}
@@ -47,7 +48,7 @@ public abstract class Actor implements Interface {
         this.ammo = ammo;
         this.armor = armor;
         this.force = force;
-        
+
     }
 
 }

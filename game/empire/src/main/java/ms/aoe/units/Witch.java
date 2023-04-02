@@ -7,7 +7,7 @@ import ms.aoe.abstr.Magican;
 public class Witch extends Magican {
 
     public Witch(boolean team, int id, String name, int x, int y) {
-        super(team, id, "Колдун", name, x, y);
+        super(team, id, WitchRank, name, x, y);
     }
 
 }
