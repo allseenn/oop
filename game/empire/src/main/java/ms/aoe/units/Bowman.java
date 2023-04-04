@@ -9,26 +9,28 @@ public class Bowman extends Bower {
     // Переопределяем функцию хода
     @Override
     public void step(LinkedList<Actor> units) {
-        if(getArrow(units)> 0){
+        if(getArrow(units)> 0){ // Если нашли стрелу
+            // Мои параметры
             String myName = this.getName(); //Мое имя
             String myRank = this.getRank(); // Мой ранг
             int myForce = this.getForce(); // Моя сила
             int myArmor = this.getArmor(); // Моя броня
-
+            // Параметры врага
             int enemyIndex = findEnemy(units);  // Узнаем индекс ближайшего врага
-            String enemyName = units.get(enemyIndex).getName(); // Имя врага
-            String enemyRank = units.get(enemyIndex).getRank(); // Ранг врага
-            int enemyArmor = units.get(enemyIndex).getArmor(); // Броня врага
-            int enemyHp = units.get(enemyIndex).getHp(); // Здоровье врага
-            int [] damage = damage(myForce, myArmor, enemyArmor, enemyHp);
-            if(enemyIndex < Integer.MAX_VALUE-1){  // Если index врага меньше чем максимальное число, то стреляем
-                if (damage[2] == 0){
+            if(enemyIndex < 999){  // Если index врага меньше чем максимальное число, то стреляем
+                String enemyName = units.get(enemyIndex).getName(); // Имя врага
+                String enemyRank = units.get(enemyIndex).getRank(); // Ранг врага
+                int enemyArmor = units.get(enemyIndex).getArmor(); // Броня врага
+                int enemyHp = units.get(enemyIndex).getHp(); // Здоровье врага
+                int [] damage = damage(myForce, myArmor, enemyArmor, enemyHp);
+
+                if (damage[2] == 0){ // Если hp равен нулю
                     units.get(enemyIndex).setArmor(0);
                     units.get(enemyIndex).setHp(0);
                     System.out.println(myRank+" "+myName+" убил "+enemyRank+" "+enemyName+", забрав броню имеет "+damage[0]);
                     return;
                 }
-                else {
+                else { // если hp не равен нулю
                     units.get(enemyIndex).setArmor(damage[1]);
                     units.get(enemyIndex).setHp(damage[2]);
                     System.out.println(myRank+" "+myName+" ранил " +enemyRank+" "+enemyName+", осталось брони "+damage[1]+", здоровья "+damage[2]);
@@ -36,11 +38,11 @@ public class Bowman extends Bower {
                 }
 
             }
-            else if (enemyIndex > Integer.MAX_VALUE-5){
+            else if (enemyIndex == 999){ // Если findEnemy вернул 999, то нет врага
                 System.out.println("Нет живого врага");
                 return;
             }
-        }
+        } // Если нет стрел
         System.out.println(this.getRank()+" "+this.getName()+" Не может найти стрел :-(");
     }
     // Функция расчета ущерба врага
@@ -65,9 +67,9 @@ public class Bowman extends Bower {
 
     // Функция поиска и уничтожения цели
     public int findEnemy(LinkedList<Actor> units){
-        int closeEnemy = Integer.MAX_VALUE;         // Индекс ближайшего врага
-        double minDist = Integer.MAX_VALUE;         // минимальная дистанция до врага
-        double curDist = Integer.MAX_VALUE;         // Текущая проверочная дистанция до врага
+        int closeEnemy = 999;         // Индекс ближайшего врага
+        double minDist = 999;         // минимальная дистанция до врага
+        double curDist = 999;         // Текущая проверочная дистанция до врага
         for (int i = 0; i < units.size(); i++){     // Пробегаем всех юнитов
             // Если это враг(добрый) и его здоровье больше 0, т.е. он живой
             if(units.get(i).getTeam() == true && units.get(i).getHp() > 0){

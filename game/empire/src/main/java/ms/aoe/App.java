@@ -11,34 +11,36 @@ public class App implements Colorit{
         Random random = new Random();
         for (int i = 0; i < teamSize; i++) {
             switch (random.nextInt(4)) {
-                case 0:
-                    units.add(new Bowman(false, i, BadNames(i), i, teamSize-1));
+                case 0: // (команда, индекс, плохое имя, X, Y)
+                    units.add(new Bowman(false, 20, BadNames(i), i, teamSize-1));
                     break;
                 case 1:
-                    units.add(new Butcher(false, i, BadNames(i), i, teamSize-1));
+                    units.add(new Butcher(false, 21, BadNames(i), i, teamSize-1));
                     break;
                 case 2:
-                    units.add(new Witch(false, i, BadNames(i), i, teamSize-1));
+                    units.add(new Witch(false, 22, BadNames(i), i, teamSize-1));
                     break;
                 default:
-                    units.add(new Punk(false, i, BadNames(i), i, teamSize-1));
+                    units.add(new Punk(false, 23, BadNames(i), i, teamSize-1));
             }
         }
         for (int i = teamSize; i < teamSize*2; i++) {
             switch (random.nextInt(4)) {
                 case 0:
-                    units.add(new Crossbow(true, i, GoodNames(i), 0, i));
+                    units.add(new Crossbow(true, 20, GoodNames(i), 0, i));
                     break;
                 case 1:
-                    units.add(new Pikeman(true, i, GoodNames(i), 0, i));
+                    units.add(new Pikeman(true, 21, GoodNames(i), 0, i));
                     break;
                 case 2:
-                    units.add(new Wizard(true, i, GoodNames(i), 0, i));
+                    units.add(new Wizard(true, 22, GoodNames(i), 0, i));
                     break;
                 default:
-                    units.add(new Squire(true, i, GoodNames(i), 0, i));
+                    units.add(new Squire(true, 23, GoodNames(i), 0, i));
             }
         }
+        // Sorting by priority
+        units.sort(null);
         // Вывод всех игров двух армий
         units.forEach(n-> System.out.println(n));
         // Цигл игры (ядро)
