@@ -40,13 +40,21 @@ public class App implements Colorit{
             }
         }
         // Sorting by priority
-        units.sort(null);
-        // Вывод всех игров двух армий
-        units.forEach(n-> System.out.println(n));
+        units.sort((t1, t2) -> t1.getId()-t2.getId());
         // Цигл игры (ядро)
         Scanner input = new Scanner(System.in);
         boolean quit = false;
         int good, bad;
+        String help = 
+        YELLOW+
+        "Стратегическая игра Mortal Control\n"+
+        "Справочная информация по клавишам\n"+
+        "q - выход из игры и завершение\n"+
+        "u - отобразить список всех юнитов\n"+
+        "s - совершить ход всеми живыми юнитами\n"+
+        "h - эта справка\n"+
+        RST;
+        System.out.printf(CLEAN + help + "Скорее начинай, жми желанную клавишу: ");
         do
         {
             good = 0; // сбрасывваем счетчик хороших в каждом цикле
@@ -55,17 +63,20 @@ public class App implements Colorit{
                 if (n.getTeam() == true && n.getHp() > 0) {good++;}  // Подсчет хороших
                 else if(n.getTeam() == false && n.getHp() > 0) {bad++; } // Подсчет плохих
             } // Вывод меню с результатами игры и (в)ыходом и (х)одом
-            System.out.printf(BLUE+"Good: "+good+RST+RED+" BadAs: "+bad+RST+" q(uit), s(tep): ");
             String user = input.nextLine(); // Выбор пользователя с клавы
+            System.out.print(CLEAN);
             if (good == 0 || bad == 0) {quit = true;} // если хорошие или плохие мертвы, то выход
-            else if (user.equals("q")) {quit = true;} // выйход если юзер ввел q
+            else if (user.equals("q")) {quit = true;} // выход если юзер ввел q
+            else if (user.equals("u")) {units.forEach(n-> {if(n.getHp()>0) {System.out.println(n);}});} // вывод списка живых units
             else if (user.equals("s")) {units.forEach(n -> {if(n.getHp()>0) {n.step(units);}});}
+            else if (user.equals("h")) {System.out.println(help);}
             else {System.out.println("Ввод не соответствует образцу!");}
+            System.out.printf(BLUE+"Good: "+good+RST+RED+" BadAs: "+bad+RST+" q(uit), u(nits), s(tep), h(elp): ");
         } // выход из цикла игры
         while(!quit);
         // Определение помедителя
-        if(good > bad){ System.out.println("Победило "+BLUE+"ДОБРО!"+RST); }
-        else { System.out.println("Победило "+RED+"ЗЛО!"+RST); }
+        if(good > bad){ System.out.println("\nПобедило "+BLUE+"ДОБРО!"+RST); }
+        else { System.out.println("\nПобедило "+RED+"ЗЛО!"+RST); }
 
     }
     public static String BadNames(int i)
