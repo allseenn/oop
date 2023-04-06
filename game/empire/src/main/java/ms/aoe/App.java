@@ -1,6 +1,5 @@
 package ms.aoe;
 import java.util.*;
-
 import ms.aoe.abstr.Actor;
 import ms.aoe.units.*;
 public class App implements Colorit{
@@ -40,12 +39,12 @@ public class App implements Colorit{
             }
         }
         // Sorting by priority
-        units.sort((t1, t2) -> t1.getId()-t2.getId());
+        units.sort((t1, t2) -> t1.getPriority()-t2.getPriority());
         // Цигл игры (ядро)
         Scanner input = new Scanner(System.in);
         boolean quit = false;
         int good, bad;
-        String help = 
+        String help =
         YELLOW+
         "Стратегическая игра Mortal Control\n"+
         "Справочная информация по клавишам\n"+
@@ -57,14 +56,14 @@ public class App implements Colorit{
         System.out.printf(CLEAN + help + "Скорее начинай, жми желанную клавишу: ");
         do
         {
-            good = 0; // сбрасывваем счетчик хороших в каждом цикле
+            good = 0; // сбрасываем счетчик хороших в каждом цикле
             bad = 0; // сброс счетчика плохих в новом цикле перед новым ходом
             for (Actor n : units) {
                 if (n.getTeam() == true && n.getHp() > 0) {good++;}  // Подсчет хороших
                 else if(n.getTeam() == false && n.getHp() > 0) {bad++; } // Подсчет плохих
             } // Вывод меню с результатами игры и (в)ыходом и (х)одом
             String user = input.nextLine(); // Выбор пользователя с клавы
-            System.out.print(CLEAN);
+            System.out.println(CLEAN); System.out.flush();
             if (good == 0 || bad == 0) {quit = true;} // если хорошие или плохие мертвы, то выход
             else if (user.equals("q")) {quit = true;} // выход если юзер ввел q
             else if (user.equals("u")) {units.forEach(n-> {if(n.getHp()>0) {System.out.println(n);}});} // вывод списка живых units

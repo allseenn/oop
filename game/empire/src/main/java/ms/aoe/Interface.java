@@ -3,9 +3,16 @@ package ms.aoe;
 import ms.aoe.abstr.Actor;
 import java.util.LinkedList;
 public interface Interface{
+    // функция хода (ряда действий)
     void step(LinkedList<Actor> units);
+    // функция вывода полей в строку
     String toString();
-
+    // Функция поиска врага
+    int findEnemy(LinkedList<Actor> units);
+    // Функция помощи другу
+    int findFriend(LinkedList<Actor> units);
+    // Функция расчета ущерба наносимого Лучниками и Пехотой
+    int[] damage(int myForce, int myArmor, int enemyArmor, int enemyHp);
     // ЛУЧНИКИ
     String BowmanRank = "Снайпер";
     String CrossbowRank = "Стрелок";
@@ -22,7 +29,7 @@ public interface Interface{
     // Оруженосцы
     String PunkRank = "Шестерка";
     String SquireRank = "Эсквайр";
-    int ServantAmmo = 10;
+    int ServantAmmo = 1;
     int ServantArmor = 0;
     int ServantForce = 0;
     // Маги
