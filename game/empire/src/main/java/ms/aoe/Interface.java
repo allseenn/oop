@@ -19,7 +19,6 @@ public interface Interface{
     int BowerAmmo = 10;
     int BowerArmor = 45;
     int BowerForce = 55;
-    int BowerAccuracy = 75;
     // СОЛДАТЫ
     String ButcherRank = "Мясник";
     String PikemanRank = "Копейщик";
