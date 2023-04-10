@@ -1,17 +1,15 @@
 package ms.aoe;
 
+import java.awt.*;
 import java.util.LinkedList;
 import java.util.Random;
 import ms.aoe.abstr.Actor;
 import ms.aoe.units.*;
-import java.awt.Panel;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.Frame;
-import java.awt.BorderLayout;
-import java.awt.Button;
 
-public class App implements Colorit {
+public class Control {
     static LinkedList<Actor> units = new LinkedList<>();
     public static LinkedList<String> log = new LinkedList<>();
     public static int xX;
@@ -55,10 +53,10 @@ public class App implements Colorit {
         // Sorting by priority
         units.sort((t1, t2) -> t1.getPriority() - t2.getPriority());
         Frame frame = new Frame("Viewer");
-        Viewer table = new Viewer(teamSize, teamSize, 40);
-        Viewer right = new Viewer(1, teamSize, 15);
-        Viewer left = new Viewer(1, teamSize, 15);
-        Viewer console = new Viewer(1, 15, 12);
+        View table = new View(teamSize, teamSize, 40, 4, "Serif", 0, 1);
+        View right = new View(1, teamSize, 15, 4, "Arial", 0, 1);
+        View left = new View(1, teamSize, 15, 4, "Bookman Old Style", 0, 1);
+        View console = new View(1, 15, 12, 2, "Courier New", 4, 0);
         Button buttonStep = new Button("step");
         Button buttonExit = new Button("exit");
 
@@ -121,6 +119,7 @@ public class App implements Colorit {
         frame.setSize(1200, 750);
         frame.setExtendedState(Frame.MAXIMIZED_BOTH);
         frame.setVisible(true);
+        frame.setForeground(Color.GREEN);
         for (Actor n : units) {
             table.setValue(n.getX(), n.getY(), n.getIcon());
             if(n.getTeam()==true){left.setValue(0, n.getY(), n.getInfo());}

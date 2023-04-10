@@ -2,7 +2,7 @@
 package ms.aoe.abstr;
 import java.util.LinkedList;
 
-import ms.aoe.App;
+import ms.aoe.Control;
 
 public abstract class Soldier extends Actor {
     @Override
@@ -15,20 +15,20 @@ public abstract class Soldier extends Actor {
             Double y = Math.sqrt((this.getX() - units.get(i).getX())*(this.getX() - units.get(i).getX()) + ((this.getY()-1) - units.get(i).getY())*((this.getY()-1) - units.get(i).getY()));
             Double min = Math.min(Math.min(Math.min(X, Y), x), y);
             if(min.equals(X)){
-                App.xX = this.getX();
-                App.yY = this.getY();
+                Control.xX = this.getX();
+                Control.yY = this.getY();
                 this.setX(this.getX()+1);}
             if(min.equals(Y)){
-                App.xX = this.getX();
-                App.yY = this.getY();
+                Control.xX = this.getX();
+                Control.yY = this.getY();
                 this.setY(this.getY()+1);}
             if(min.equals(x)){
-                App.xX = this.getX();
-                App.yY = this.getY();
+                Control.xX = this.getX();
+                Control.yY = this.getY();
                 this.setX(this.getX()-1);}
             if(min.equals(y)){
-                App.xX = this.getX();
-                App.yY = this.getY();
+                Control.xX = this.getX();
+                Control.yY = this.getY();
                 this.setY(this.getY()-1);}
             min = Math.sqrt((this.getX() - units.get(i).getX())*(this.getX() - units.get(i).getX()) + (this.getY() - units.get(i).getY())*(this.getY() - units.get(i).getY()));
             if(min < 2){
@@ -47,13 +47,13 @@ public abstract class Soldier extends Actor {
                     units.get(i).setArmor(0);
                     units.get(i).setHp(0);
                     this.setArmor(damage[0]);
-                    App.log.add(myRank+" "+myName+" зарубил "+enemyRank+" "+enemyName+", забрав броню имеет "+damage[0]);
+                    Control.log.add(myRank+" "+myName+" зарубил "+enemyRank+" "+enemyName+", забрав броню имеет "+damage[0]);
                     return;
                 }
                 else { // если hp не равен нулю
                     units.get(i).setArmor(damage[1]);
                     units.get(i).setHp(damage[2]);
-                    App.log.add(myRank+" "+myName+" ранил " +enemyRank+" "+enemyName+", осталось брони "+damage[1]+", здоровья "+damage[2]);
+                    Control.log.add(myRank+" "+myName+" ранил " +enemyRank+" "+enemyName+", осталось брони "+damage[1]+", здоровья "+damage[2]);
                     return;
                 }
 
@@ -61,7 +61,7 @@ public abstract class Soldier extends Actor {
 
         }
         else if (i == 999){ // Если findEnemy вернул 999, то нет врага
-            App.log.add("Нет живого противника");
+            Control.log.add("Нет живого противника");
             return;
         }
     }
