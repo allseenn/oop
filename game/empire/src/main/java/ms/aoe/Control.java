@@ -20,7 +20,7 @@ public class App implements Colorit {
     public static void play() {
         // Создание двух армий
         int teamSize = Interface.teamSize;
-        
+
         Random random = new Random();
         for (int i = 0; i < teamSize; i++) {
             switch (random.nextInt(4)) {
@@ -61,7 +61,7 @@ public class App implements Colorit {
         Viewer console = new Viewer(1, 15, 12);
         Button buttonStep = new Button("step");
         Button buttonExit = new Button("exit");
-        
+
         buttonStep.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Integer good = 0;
@@ -119,6 +119,7 @@ public class App implements Colorit {
         frame.add(panel, BorderLayout.SOUTH);
         frame.add(console, BorderLayout.NORTH);
         frame.setSize(1200, 750);
+        frame.setExtendedState(Frame.MAXIMIZED_BOTH);
         frame.setVisible(true);
         for (Actor n : units) {
             table.setValue(n.getX(), n.getY(), n.getIcon());

@@ -24,16 +24,16 @@ public class Viewer extends Canvas {
     public void paint(Graphics g) {
         int cellWidth = getWidth() / width;
         int cellHeight = getHeight() / hight;
-        
+
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < hight; j++) {
-                g.setFont(new Font("Arial", Font.PLAIN, textSize));
+                g.setFont(new Font("FreeSerif", Font.PLAIN, textSize));
                 g.setColor(Color.WHITE);
                 g.fillRect(i * cellWidth, j * cellHeight, cellWidth, cellHeight);
                 g.setColor(Color.BLACK);
                 g.drawRect(i * cellWidth, j * cellHeight, cellWidth, cellHeight);
                 g.drawString(String.valueOf(table[i][j]), i * cellWidth + cellWidth/5, j * cellHeight + cellHeight-7);
-                
+
             }
         }
     }
