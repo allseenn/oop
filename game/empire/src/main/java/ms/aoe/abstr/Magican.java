@@ -1,5 +1,6 @@
 // Маги - абстрактный класс расширяет высшый класс Актер
 package ms.aoe.abstr;
+import ms.aoe.App;
 import java.util.LinkedList;
 public abstract class Magican extends Actor {
 
@@ -33,15 +34,15 @@ public abstract class Magican extends Actor {
             String friendName = units.get(friendIndex).getName();
             String friendRank = units.get(friendIndex).getRank();
             units.get(enemyIndex).setHp(enemyHp-magForce);
-            System.out.println(magRank+" "+magName+" забрал "+magForce+" здоровья у "+enemyRank+" "+enemyName);
+            App.log.add(magRank+" "+magName+" забрал "+magForce+" здоровья у "+enemyRank+" "+enemyName);
             units.get(friendIndex).setHp(friendHp+magForce);
-            System.out.println(magRank+" "+magName+" отдал "+magForce+" здоровья "+friendRank+" "+friendName);
+            App.log.add(magRank+" "+magName+" отдал "+magForce+" здоровья "+friendRank+" "+friendName);
         }
         return;   
     }
 
-    public Magican(boolean team, int id, String staff, String name, int x, int y) {
-        super(team, id, staff, name, x, y, MagicanAmmo, MagicanArmor, MagicanForce);
+    public Magican(boolean team, int priority, String icon, String rank, String name, int x, int y) {
+        super(team, priority, icon, rank, name, x, y, MagicanAmmo, MagicanArmor, MagicanForce);
 
     }
 

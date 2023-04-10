@@ -1,29 +1,43 @@
 package ms.aoe;
-import java.util.*;
+
+import java.util.LinkedList;
+import java.util.Random;
 import ms.aoe.abstr.Actor;
 import ms.aoe.units.*;
-public class App implements Colorit{
-    public static void main(String[] args) {
+import java.awt.Panel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.Frame;
+import java.awt.BorderLayout;
+import java.awt.Button;
+
+public class App implements Colorit {
+    static LinkedList<Actor> units = new LinkedList<>();
+    public static LinkedList<String> log = new LinkedList<>();
+    public static int xX;
+    public static int yY;
+   // public static void main(String[] args) {
+    public static void play() {
         // Создание двух армий
-        // int teamSize = 10; // количество воинов в одной команде
-        LinkedList<Actor> units = new LinkedList<>();
+        int teamSize = Interface.teamSize;
+        
         Random random = new Random();
         for (int i = 0; i < teamSize; i++) {
             switch (random.nextInt(4)) {
                 case 0: // (команда, индекс, плохое имя, X, Y)
-                    units.add(new Bowman(false, 20, BadNames(i), i, teamSize-1));
+                    units.add(new Bowman(false, 20, BadNames(i), teamSize - 1, i));
                     break;
                 case 1:
-                    units.add(new Butcher(false, 21, BadNames(i), i, teamSize-1));
+                    units.add(new Butcher(false, 21, BadNames(i), teamSize - 1, i));
                     break;
                 case 2:
-                    units.add(new Witch(false, 22, BadNames(i), i, teamSize-1));
+                    units.add(new Witch(false, 22, BadNames(i), teamSize - 1, i));
                     break;
                 default:
-                    units.add(new Punk(false, 23, BadNames(i), i, teamSize-1));
+                    units.add(new Punk(false, 23, BadNames(i), teamSize - 1, i));
             }
         }
-        for (int i = teamSize; i < teamSize*2; i++) {
+        for (int i = 0; i < teamSize; i++) {
             switch (random.nextInt(4)) {
                 case 0:
                     units.add(new Crossbow(true, 20, GoodNames(i), 0, i));
@@ -39,53 +53,89 @@ public class App implements Colorit{
             }
         }
         // Sorting by priority
-        units.sort((t1, t2) -> t1.getPriority()-t2.getPriority());
-        // Цигл игры (ядро)
-        Scanner input = new Scanner(System.in);
-        boolean quit = false;
-        int good, bad;
-        String help =
-        YELLOW+
-        "Стратегическая игра Mortal Control\n"+
-        "Справочная информация по клавишам\n"+
-        "q - выход из игры и завершение\n"+
-        "u - отобразить список всех юнитов\n"+
-        "s - совершить ход всеми живыми юнитами\n"+
-        "h - эта справка\n"+
-        RST;
-        System.out.printf(CLEAN + help + "Скорее начинай, жми желанную клавишу: ");
-        do
-        {
-            good = 0; // сбрасываем счетчик хороших в каждом цикле
-            bad = 0; // сброс счетчика плохих в новом цикле перед новым ходом
-            for (Actor n : units) {
-                if (n.getTeam() == true && n.getHp() > 0) {good++;}  // Подсчет хороших
-                else if(n.getTeam() == false && n.getHp() > 0) {bad++; } // Подсчет плохих
-            } // Вывод меню с результатами игры и (в)ыходом и (х)одом
-            String user = input.nextLine(); // Выбор пользователя с клавы
-            System.out.println(CLEAN); System.out.flush();
-            if (good == 0 || bad == 0) {quit = true;} // если хорошие или плохие мертвы, то выход
-            else if (user.equals("q")) {quit = true;} // выход если юзер ввел q
-            else if (user.equals("u")) {units.forEach(n-> {if(n.getHp()>0) {System.out.println(n);}});} // вывод списка живых units
-            else if (user.equals("s")) {units.forEach(n -> {if(n.getHp()>0) {n.step(units);}});}
-            else if (user.equals("h")) {System.out.println(help);}
-            else {System.out.println("Ввод не соответствует образцу!");}
-            System.out.printf(BLUE+"Good: "+good+RST+RED+" BadAs: "+bad+RST+" q(uit), u(nits), s(tep), h(elp): ");
-        } // выход из цикла игры
-        while(!quit);
-        // Определение помедителя
-        if(good > bad){ System.out.println("\nПобедило "+BLUE+"ДОБРО!"+RST); }
-        else { System.out.println("\nПобедило "+RED+"ЗЛО!"+RST); }
+        units.sort((t1, t2) -> t1.getPriority() - t2.getPriority());
+        Frame frame = new Frame("Viewer");
+        Viewer table = new Viewer(teamSize, teamSize, 40);
+        Viewer right = new Viewer(1, teamSize, 15);
+        Viewer left = new Viewer(1, teamSize, 15);
+        Viewer console = new Viewer(1, 15, 12);
+        Button buttonStep = new Button("step");
+        Button buttonExit = new Button("exit");
+        
+        buttonStep.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Integer good = 0;
+                Integer bad = 0;
+                for (Actor n : units) {
+                    if (n.getHp() > 0) {
+                        xX = 999;
+                        yY = 999;
+                        n.step(units);
+                        table.setValue(n.getX(), n.getY(), n.getIcon());
+                        if (n.getTeam() == true) {
+                            left.setValue(0, n.getY(), n.getInfo());
+                            good++;
+                        }
+                        if (n.getTeam() == false) {
+                            right.setValue(0, n.getY(), n.getInfo());
+                            bad++;
+                        }
+                    } else {
+                        table.setValue(n.getX(), n.getY(), "");
+                       if(n.getTeam()==true){left.setValue(0, n.getY(), n.getInfo());}
+                       if(n.getTeam()==false){right.setValue(0, n.getY(), n.getInfo());}
+                    }
+                    if(xX!=999 || yY!=999){table.setValue(xX, yY, "");}
+                }
+                if (good == 0 || bad == 0) {
+                    buttonStep.setEnabled(false);
+                    if(good > bad){ log.add("ПОБЕДИЛО ДОБРО!"); }
+                    else { log.add("ПОБЕДИЛО ЗЛО!"); }
+                }
+                int count = 0;
+                for (int i = log.size()-15; i < log.size(); i++) {
+                    console.setValue(0, count, log.get(i));
+                    count++;
+                }
+                units.sort((t1, t2) -> t1.getPriority() - t2.getPriority());
+            }
+        });
+        buttonExit.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+            }
+        });
+        Panel panel = new Panel();
+        panel.setLayout(new BorderLayout());
+        frame.setLayout(new BorderLayout());
+        right.setSize(350,500);
+        left.setSize(350, 500);
+        console.setSize(1200, 250);
+        frame.add(table, BorderLayout.CENTER);
+        frame.add(left, BorderLayout.WEST);
+        frame.add(right, BorderLayout.EAST);
+        panel.add(buttonStep, BorderLayout.WEST);
+        panel.add(buttonExit, BorderLayout.EAST);
+        frame.add(panel, BorderLayout.SOUTH);
+        frame.add(console, BorderLayout.NORTH);
+        frame.setSize(1200, 750);
+        frame.setVisible(true);
+        for (Actor n : units) {
+            table.setValue(n.getX(), n.getY(), n.getIcon());
+            if(n.getTeam()==true){left.setValue(0, n.getY(), n.getInfo());}
+            if(n.getTeam()==false){right.setValue(0, n.getY(), n.getInfo());}
+        }
+        console.setValue(0, 0, "Добро пожаловать в игру Снежный Барс ))");
 
     }
-    public static String BadNames(int i)
-    {
+
+    public static String BadNames(int i) {
         NamesBad[] names = NamesBad.values();
-        return RED+names[i].toString()+RST;
+        return names[i].toString();
     }
-    public static String GoodNames(int i)
-    {
+
+    public static String GoodNames(int i) {
         NamesGood[] names = NamesGood.values();
-        return BLUE+names[i].toString()+RST;
+        return names[i].toString();
     }
 }

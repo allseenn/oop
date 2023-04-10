@@ -6,8 +6,8 @@ import ms.aoe.abstr.Magican;
 
 public class Witch extends Magican {
 
-    public Witch(boolean team, int id, String name, int x, int y) {
-        super(team, id, WitchRank, name, x, y);
+    public Witch(boolean team, int priority, String name, int x, int y) {
+        super(team, priority, WitchIcon, WitchRank, name, x, y);
     }
 
 }

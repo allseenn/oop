@@ -5,8 +5,8 @@ import ms.aoe.abstr.Soldier;
 
 public class Butcher extends Soldier {
 
-    public Butcher(boolean team, int id, String name, int x, int y) {
-        super(team, id, ButcherRank, name, x, y);
+    public Butcher(boolean team, int priority, String name, int x, int y) {
+        super(team, priority, ButcherIcon, ButcherRank, name, x, y);
     }
 
 }

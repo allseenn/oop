@@ -6,11 +6,20 @@ import java.util.LinkedList;
 public abstract class Actor implements Interface {
     private Boolean team;
     private Integer priority, x, y, hp, ammo, armor, force;
-    private String name, rank;
+    private String name, rank, icon;
     
     @Override
     public String toString() {
-        return priority +" "+rank+" "+name+", ("+x+"; "+y+"), Здоров "+hp+", БП "+ammo+", Броня "+armor+", Сила "+force;
+        return priority +" "+icon+" "+rank+" "+name+", ("+x+"; "+y+"), Здоров "+hp+", БП "+ammo+", Броня "+armor+", Сила "+force;
+    }
+
+    @Override
+    public String getInfo() {
+        return name +
+                " H:" +hp+
+                " A:" +ammo+
+                " R:" +armor+
+                " F:" +force;
     }
 
     @Override
@@ -56,6 +65,7 @@ public abstract class Actor implements Interface {
 
     public boolean getTeam(){return this.team;}
     public int getPriority(){return this.priority;}
+    public String getIcon(){return this.icon;}
     public String getRank(){return this.rank;}
     public String getName(){return this.name;}
     public int getX(){ return this.x;}
@@ -66,6 +76,7 @@ public abstract class Actor implements Interface {
     public int getForce(){ return this.force;}
     public void setTeam(boolean team){this.team=team;}
     public void setPriority(int priority){this.priority = priority;}
+    public void setIcon(String icon){this.name=icon;}
     public void setRank(String rank){this.name=rank;}
     public void setName(String name){this.name=name;}
     public void setX(int x){this.x=x;}
@@ -75,9 +86,10 @@ public abstract class Actor implements Interface {
     public void setArmor(int armor){this.armor=armor;}
     public void setForce(int force){this.force=force;}
 
-    public Actor(boolean team, int priority, String rank, String name, int x, int y, int ammo, int armor, int force){
+    public Actor(boolean team, int priority, String icon, String rank, String name, int x, int y, int ammo, int armor, int force){
         this.team = team;
         this.priority = priority;
+        this.icon = icon;
         this.rank = rank;
         this.name = name;
         this.x = x;

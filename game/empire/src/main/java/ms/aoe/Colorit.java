@@ -1,7 +1,6 @@
 package ms.aoe;
 
 public interface Colorit {
-    int teamSize = 10;
     String CLEAN = "\033[H\033[2J";
     String RST = "\u001B[0m";
     String BLACK = "\u001B[30m";

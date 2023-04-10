@@ -9,8 +9,8 @@ public abstract class Bower extends Actor {
     public void step(LinkedList<Actor>units) {}
 
 
-    public Bower(boolean team, int id, String staff, String name, int x, int y) {
-        super(team, id, staff, name, x, y, BowerAmmo, BowerArmor, BowerForce);
+    public Bower(boolean team, int priority, String icon, String rank, String name, int x, int y) {
+        super(team, priority, icon, rank, name, x, y, BowerAmmo, BowerArmor, BowerForce);
 
     }
 

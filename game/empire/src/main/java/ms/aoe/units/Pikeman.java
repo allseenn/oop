@@ -5,8 +5,8 @@ import ms.aoe.abstr.Soldier;
 
 public class Pikeman extends Soldier {
 
-    public Pikeman(boolean team, int id, String name, int x, int y) {
-        super(team, id, PikemanRank, name, x, y);
+    public Pikeman(boolean team, int priority, String name, int x, int y) {
+        super(team, priority, PikemanIcon, PikemanRank, name, x, y);
     }
 
 }
