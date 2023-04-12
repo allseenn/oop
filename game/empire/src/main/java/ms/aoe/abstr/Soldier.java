@@ -47,13 +47,13 @@ public abstract class Soldier extends Actor {
                     units.get(i).setArmor(0);
                     units.get(i).setHp(0);
                     this.setArmor(damage[0]);
-                    Control.log.add(myRank+" "+myName+" зарубил "+enemyRank+" "+enemyName+", забрав броню имеет "+damage[0]);
+                    Control.log += myRank+" "+myName+" зарубил "+enemyRank+" "+enemyName+", забрав броню имеет "+damage[0]+"\n";
                     return;
                 }
                 else { // если hp не равен нулю
                     units.get(i).setArmor(damage[1]);
                     units.get(i).setHp(damage[2]);
-                    Control.log.add(myRank+" "+myName+" ранил " +enemyRank+" "+enemyName+", осталось брони "+damage[1]+", здоровья "+damage[2]);
+                    Control.log += myRank+" "+myName+" ранил " +enemyRank+" "+enemyName+", осталось брони "+damage[1]+", здоровья "+damage[2]+"\n";
                     return;
                 }
 
@@ -61,7 +61,7 @@ public abstract class Soldier extends Actor {
 
         }
         else if (i == 999){ // Если findEnemy вернул 999, то нет врага
-            Control.log.add("Нет живого противника");
+            Control.log += "Нет живого противника"+"\n";
             return;
         }
     }

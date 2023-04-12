@@ -27,23 +27,23 @@ public class Crossbow extends Bower {
                     units.get(enemyIndex).setArmor(0);
                     units.get(enemyIndex).setHp(0);
                     this.setArmor(damage[0]);
-                    Control.log.add(myRank+" "+myName+" убил "+enemyRank+" "+enemyName+", забрав броню имеет "+damage[0]);
+                    Control.log += myRank+" "+myName+" убил "+enemyRank+" "+enemyName+", забрав броню имеет "+damage[0]+"\n";
                     return;
                 }
                 else {
                     units.get(enemyIndex).setArmor(damage[1]);
                     units.get(enemyIndex).setHp(damage[2]);
-                    Control.log.add(myRank+" "+myName+" ранил " +enemyRank+" "+enemyName+", осталось брони "+damage[1]+", здоровья "+damage[2]);
+                    Control.log += myRank+" "+myName+" ранил " +enemyRank+" "+enemyName+", осталось брони "+damage[1]+", здоровья "+damage[2]+"\n";
                     return;
                 }
 
             }
             else if (enemyIndex == 999) {
-                Control.log.add("Нет живого зла");
+                Control.log += "Нет живого зла"+"\n";
                 return;
             }
         }
-        Control.log.add(this.getRank()+" "+this.getName()+" Не может найти стрел :-(");
+        Control.log += this.getRank()+" "+this.getName()+" Не может найти стрел :-("+"\n";
     }
 
     // функция проверки стрел у Эскваеров
@@ -53,7 +53,7 @@ public class Crossbow extends Bower {
             // Если Эскваера И есть стрелы И он живой
             if(units.get(i).getRank().equals(SquireRank) && units.get(i).getAmmo()> 0 && units.get(i).getHp() > 0){
                 units.get(i).setAmmo(units.get(i).getAmmo()-1); // Забираем одну стрелу
-                Control.log.add(CrossbowRank+" "+units.get(i).getName()+" передал стрелу "+this.getRank()+" "+this.getName()+", оствив "+ units.get(i).getAmmo());
+                Control.log += CrossbowRank+" "+units.get(i).getName()+" передал стрелу "+this.getRank()+" "+this.getName()+", оствив "+ units.get(i).getAmmo()+"\n";
                 arrow = 1;                                      // Зажимаем в руке
                 return arrow;                                   // Возвращаем в фнкцию step
             }
@@ -61,7 +61,7 @@ public class Crossbow extends Bower {
         // Случай когда у Эсквайера нет стрел
         if(this.getAmmo() > 0) {                // Проверяем свой колчан
             this.setAmmo(this.getAmmo()-1);     // Достаем из колчана стрелу
-            Control.log.add(this.getRank()+" "+this.getName()+" не нашел "+CrossbowRank+" взял свою из колчана, в нем осталось "+this.getAmmo());
+            Control.log += this.getRank()+" "+this.getName()+" не нашел "+CrossbowRank+" взял свою из колчана, в нем осталось "+this.getAmmo()+"\n";
             arrow = 1;                          // Зажимаем в кулак
             return arrow;                       // Возвращаем в функцию step
         }
