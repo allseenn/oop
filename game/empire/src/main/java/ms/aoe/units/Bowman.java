@@ -29,23 +29,27 @@ public class Bowman extends Bower {
                     units.get(enemyIndex).setArmor(0);
                     units.get(enemyIndex).setHp(0);
                     this.setArmor(damage[0]);
-                    Control.log += myRank+" "+myName+" убил "+enemyRank+" "+enemyName+", забрав броню имеет "+damage[0]+"\n";
+                    Control.console.append(java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss ")));
+                    Control.console.append(myRank+" "+myName+" убил "+enemyRank+" "+enemyName+", забрав броню имеет "+damage[0]+"\n");
                     return;
                 }
                 else { // если hp не равен нулю
                     units.get(enemyIndex).setArmor(damage[1]);
                     units.get(enemyIndex).setHp(damage[2]);
-                    Control.log += myRank+" "+myName+" ранил " +enemyRank+" "+enemyName+", осталось брони "+damage[1]+", здоровья "+damage[2]+"\n";
+                    Control.console.append(java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss ")));
+                    Control.console.append(myRank+" "+myName+" ранил " +enemyRank+" "+enemyName+", осталось брони "+damage[1]+", здоровья "+damage[2]+"\n");
                     return;
                 }
 
             }
             else if (enemyIndex == 999){ // Если findEnemy вернул 999, то нет врага
-                Control.log += "Нет живого добра"+"\n";
+                Control.console.append(java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss ")));
+                Control.console.append("Нет живого добра"+"\n");
                 return;
             }
         } // Если нет стрел
-        Control.log += this.getRank()+" "+this.getName()+" Не может найти стрел :-("+"\n";
+        Control.console.append(java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss ")));
+        Control.console.append(this.getRank()+" "+this.getName()+" Не может найти стрел :-("+"\n");
     }
     // Функция расчета ущерба врага
 
@@ -57,7 +61,8 @@ public class Bowman extends Bower {
             // Если Шестерка И есть стрелы И он живой
             if(units.get(i).getRank().equals(PunkRank) && units.get(i).getAmmo()> 0 && units.get(i).getHp() > 0){
                 units.get(i).setAmmo(units.get(i).getAmmo()-1); // Забираем одну стрелу
-                Control.log += PunkRank+" "+units.get(i).getName()+" передал 1 стрелу "+this.getRank()+" "+this.getName()+", оствив "+ units.get(i).getAmmo()+"\n";
+                Control.console.append(java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss ")));
+                Control.console.append(PunkRank+" "+units.get(i).getName()+" передал 1 стрелу "+this.getRank()+" "+this.getName()+", оствив "+ units.get(i).getAmmo()+"\n");
                 arrow = 1;                                      // Зажимаем в руке
                 return arrow;                                   // Возвращаем в фнкцию step
             }
@@ -65,7 +70,8 @@ public class Bowman extends Bower {
         // Случай когда у Шестерок нет стрел
         if(this.getAmmo() > 0) {                // Проверяем свой колчан
             this.setAmmo(this.getAmmo()-1);     // Достаем из колчана стрелу
-            Control.log += this.getRank()+" "+this.getName()+" не нашел "+PunkRank+" взял свою из колчана, в нем осталось "+this.getAmmo()+"\n";
+            Control.console.append(java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss ")));
+            Control.console.append(this.getRank()+" "+this.getName()+" не нашел "+PunkRank+" взял свою из колчана, в нем осталось "+this.getAmmo()+"\n");
             arrow = 1;                          // Зажимаем в кулак
             return arrow;                       // Возвращаем в функцию step
         }

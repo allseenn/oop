@@ -4,6 +4,7 @@ import ms.aoe.abstr.Actor;
 
 import java.util.LinkedList;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.awt.Frame;
 import java.awt.TextArea;
@@ -16,9 +17,10 @@ import java.awt.event.ActionListener;
 
 public class Control {
     static LinkedList<Actor> units = new LinkedList<>();
-    public static String log = "";
+   // public static String log = "";
     public static int xX; // внешне изменяемая X для того чтобы изменять положение пехоты на поле
     public static int yY; // внешне изменяемая У для того чтобы изменять положение пехоты на поле
+    public static TextArea console = new TextArea();
    // public static void main(String[] args) {
     public static void play() {
         // Создание двух армий (случайно)
@@ -60,8 +62,6 @@ public class Control {
         // Создаем главный фрейм (Заголовок окна)
         Frame frame = new Frame("Империя");
         // Верхнее окно консоли
-        TextArea console = new TextArea();
-        //View console = new View(1, 15, 12, 2, "Courier New", 4, 0);
         // Создаем поле в виде таблицы (полей, строк, размерШрифта, цветТекста, текстовыйШрифт, заливка, видимостьЛиний)
         View table = new View(teamSize, teamSize, 40, 4, "Serif", 0, 1);
         // Левое окно
@@ -80,12 +80,15 @@ public class Control {
             public void actionPerformed(ActionEvent e) {
                 Integer good = 0;
                 Integer bad = 0;
+                console.append("ХОД № "+count.incrementAndGet()+"\n");
                 for (Actor n : units) {
+                    TimeUnit.SECONDS.sleep(1);
                     if (n.getHp() > 0) {
                         xX = 999;
                         yY = 999;
                         n.step(units);
                         table.setValue(n.getX(), n.getY(), n.getIcon());
+
                         if (n.getTeam() == true) {
                             left.setValue(0, n.getY(), n.getInfo());
                             good++;
@@ -103,15 +106,10 @@ public class Control {
                 }
                 if (good == 0 || bad == 0) {
                     buttonStep.setEnabled(false);
-                    if(good > bad){ log += "ПОБЕДИЛО ДОБРО!\n"; }
-                    else { log += "ПОБЕДИЛО ЗЛО!\n"; }
+                    if(good > bad){ console.append("ПОБЕДИЛО ДОБРО!\n"); }
+                    else { console.append("ПОБЕДИЛО ЗЛО!\n"); }
                 }
-
-                   console.append(java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss ")));
-                   console.append("ХОД № "+count.incrementAndGet()+"\n");
-                   console.append(log);
-                   log = ""; 
-
+                   
                 units.sort((t1, t2) -> t1.getPriority() - t2.getPriority());
             }
         });

@@ -34,9 +34,11 @@ public abstract class Magican extends Actor {
             String friendName = units.get(friendIndex).getName();
             String friendRank = units.get(friendIndex).getRank();
             units.get(enemyIndex).setHp(enemyHp-magForce);
-            Control.log += magRank+" "+magName+" забрал "+magForce+" здоровья у "+enemyRank+" "+enemyName+"\n";
+            Control.console.append(java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss ")));
+            Control.console.append(magRank+" "+magName+" забрал "+magForce+" здоровья у "+enemyRank+" "+enemyName+"\n");
             units.get(friendIndex).setHp(friendHp+magForce);
-            Control.log += magRank+" "+magName+" отдал "+magForce+" здоровья "+friendRank+" "+friendName+"\n";
+            Control.console.append(java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss ")));
+            Control.console.append(magRank+" "+magName+" отдал "+magForce+" здоровья "+friendRank+" "+friendName+"\n");
         }
         return;
     }
