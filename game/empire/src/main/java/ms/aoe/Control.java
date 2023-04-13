@@ -132,9 +132,14 @@ public class Control {
 
         buttonRestart.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                frame.dispose();
                 units.clear();
                 count = 1;
-                frame.dispose();
+                for (int i = 0; i < teamSize; i++) {
+                    for (int j = 0; j < teamSize; j++) {
+                        table.setValue(i, j, "");
+                    }
+                }
                 play();
 
             }
