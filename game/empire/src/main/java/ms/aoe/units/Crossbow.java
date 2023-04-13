@@ -67,7 +67,7 @@ public class Crossbow extends Bower {
         if(this.getAmmo() > 0) {                // Проверяем свой колчан
             this.setAmmo(this.getAmmo()-1);     // Достаем из колчана стрелу
             Control.console.append(java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss ")));
-            Control.console.append(this.getRank()+" "+this.getName()+" не нашел "+CrossbowRank+" взял свою из колчана, в нем осталось "+this.getAmmo()+"\n");
+            Control.console.append(this.getRank()+" "+this.getName()+" не нашел "+SquireRank+" взял свою из колчана, в нем осталось "+this.getAmmo()+" стрел\n");
             arrow = 1;                          // Зажимаем в кулак
             return arrow;                       // Возвращаем в функцию step
         }

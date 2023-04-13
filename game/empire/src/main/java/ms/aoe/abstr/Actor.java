@@ -7,7 +7,7 @@ public abstract class Actor implements Interface {
     private Boolean team;
     private Integer priority, x, y, hp, ammo, armor, force;
     private String name, rank, icon;
-    
+
     @Override
     public String toString() {
         return priority +" "+icon+" "+rank+" "+name+", ("+x+"; "+y+"), Здоров "+hp+", БП "+ammo+", Броня "+armor+", Сила "+force;
@@ -15,7 +15,7 @@ public abstract class Actor implements Interface {
 
     @Override
     public String getInfo() {
-        return name +
+        return rank+" "+name+
                 " H:" +hp+
                 " A:" +ammo+
                 " R:" +armor+

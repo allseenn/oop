@@ -6,11 +6,11 @@ import java.awt.Font;
 
 public class View extends Canvas {
 
-    private int width, hight, textSize, textColor, fillColor, lines;
+    private int width, hight, textSize, textColor, fillColor, lines, align;
     String textStyle;
     private String[][] table;
 
-    public View(int width, int hight, int textSize, int textColor, String textStyle, int fillColor, int lines) {
+    public View(int width, int hight, int textSize, int textColor, String textStyle, int fillColor, int lines, int align) {
         this.width = width;
         this.hight = hight;
         this.textSize = textSize;
@@ -18,6 +18,7 @@ public class View extends Canvas {
         this.textColor = textColor;
         this.fillColor = fillColor;
         this.lines = lines;
+        this.align = align;
         this.table = new String[width][hight];
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < hight; j++) {
@@ -46,7 +47,7 @@ public class View extends Canvas {
                 else if(textColor == 3){ g.setColor(Color.RED);}
                 else if(textColor == 4){ g.setColor(Color.BLACK);}
                 if(lines > 0) { g.drawRect(i * cellWidth, j * cellHeight, cellWidth, cellHeight);}
-                g.drawString(String.valueOf(table[i][j]), i * cellWidth + cellWidth/5, j * cellHeight + cellHeight-7);
+                g.drawString(String.valueOf(table[i][j]), i * cellWidth + cellWidth/align, j * cellHeight + cellHeight-7);
 
             }
         }
