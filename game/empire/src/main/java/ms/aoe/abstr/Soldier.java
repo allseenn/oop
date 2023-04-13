@@ -63,6 +63,7 @@ public abstract class Soldier extends Actor {
                     this.setArmor(damage[0]);
                     Control.console.append(java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss ")));
                     Control.console.append(myRank+" "+myName+" зарубил "+enemyRank+" "+enemyName+", забрав броню имеет "+damage[0]+"\n");
+                    Control.table.setValue(units.get(enemyIndex).getX(), units.get(enemyIndex).getY(), "");
                     return;
                 }
                 else { // если hp не равен нулю
